@@ -81,7 +81,7 @@ function entramiento(_callback) {
         keyframes:[
             {background:" radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 24%, rgba(255,255,255,0) 100%)"},
             { background: "radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 13%, rgba(255,255,255,0) 71%, rgba(255,255,255,0) 100%)"},
-            { background: "radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,87,255,1) 66%, rgba(255,61,255,0) 76%, rgba(255,0,255,1) 100%)"},
+            { background: "radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 66%, rgba(255,255,255,0) 76%, rgba(255,255,255,1) 100%)"},
         ],
         borderRadius:"100%",
         duration: 2000,

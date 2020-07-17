@@ -102,8 +102,9 @@ function texto() {
     let lineas=linea(texto,tamlinea);
     let textoanime=anime.timeline({
 
-        autoplay: true,
+
         easing:"linear",
+        
 
 
 
@@ -124,7 +125,7 @@ function texto() {
     textoanime.add({
         targets:textHist2,
         duration:2000,
-        translateY: -2*stilo.getPropertyValue("font-size")
+        translateY: -2*stilo.getPropertyValue("font-size").split("px")[0]
     });
     textoanime.add({
         targets:textHist1,
@@ -139,10 +140,12 @@ function texto() {
         duration:2000,
         begin:function () {
             textHist1.innerHTML=lineas[i++];
-        }
+        },
+
 
     });
 //textoanime.play();
+
 
 
    /* let proceso=setInterval(()=>{
