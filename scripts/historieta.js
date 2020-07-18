@@ -86,7 +86,7 @@ function texto() {
 
 
 
-    let intervalo=3000;
+    let intervalo=6000;
 
     let i=0;
 
@@ -95,71 +95,67 @@ function texto() {
 
     let textHist1=document.getElementById("texto_historia");
     let stilo=window.getComputedStyle(textHist1);
-//alert((stilo.getPropertyValue("font-size").split("px")[0]));
-    //alert(textHist1.clientWidth)
+
     let tamlinea=Math.round(stilo.getPropertyValue("width").split("px")[0]*100/parseInt(stilo.getPropertyValue("font-size").split("px")[0]*45));
     let textHist2=document.getElementById("texto_historia2");
     let lineas=linea(texto,tamlinea);
-    let textoanime=anime.timeline({
+    let textos=[textHist2,textHist1];
+    let textoanime;
 
+let proceso=setInterval(()=>{
+
+
+
+
+    textoanime=anime.timeline({
 
         easing:"linear",
-        
-
-
-
 
     });
 
     textoanime.add({
         opacity: 1,
-       targets:textHist2,
+       targets:textos[i%2],
         duration:2000,
         begin:function () {
-            textHist2.innerHTML=lineas[i++]
+            textos[i%2].innerHTML=lineas[i++]
 
         }
-
-
     });
     textoanime.add({
-        targets:textHist2,
+        targets:textos[(i-1)%2],
         duration:2000,
         translateY: -2*stilo.getPropertyValue("font-size").split("px")[0]
     });
     textoanime.add({
-        targets:textHist1,
+        targets:textos[i%2],
         translateY: 2*stilo.getPropertyValue("font-size").split("px")[0],
         duration:2000,
 
 
-    });
-    textoanime.add({
+    },'-=2000');
+    /*textoanime.add({
         opacity:1,
-        targets:textHist1,
+        targets:textos[i],
         duration:2000,
         begin:function () {
             textHist1.innerHTML=lineas[i++];
         },
 
 
-    });
-//textoanime.play();
+    });*/
+
+    textoanime.add({
+        targets:textHist2,
+        opacity:0,
+        duration:2000,
+
+    })
 
 
 
-   /* let proceso=setInterval(()=>{
-        if(i===lineas.length-1)
-            clearInterval(proceso);
-        textHist1.innerHTML=lineas[i];
+},intervalo);
 
-        i++;
-
-
-
-
-
-    }, intervalo);*/
 
 
 

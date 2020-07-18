@@ -67,12 +67,14 @@ body {
     overflow: hidden;
 }
 #texto_historia2{
+    position: relative;
     font-size: 20px;
 
     color: white;
     opacity: 0;
 }
 #texto_historia{
+    position: relative;
 
     font-size: 20px;
     margin-top: 10%;
