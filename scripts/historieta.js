@@ -134,16 +134,7 @@ let proceso=setInterval(()=>{
 
 
     },'-=2000');
-    /*textoanime.add({
-        opacity:1,
-        targets:textos[i],
-        duration:2000,
-        begin:function () {
-            textHist1.innerHTML=lineas[i++];
-        },
 
-
-    });*/
 
     textoanime.add({
         targets:textHist2,
@@ -160,6 +151,10 @@ let proceso=setInterval(()=>{
 
 
 }
+
+
+
+
 
 function linea(texto,tamlinea) {
     let i=0;
