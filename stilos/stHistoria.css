@@ -24,6 +24,7 @@
     display: block;
 }
 #barra_negra-arriba{
+    justify-content: center;
     float:top;
     transform: translateX(-10px)translateY(-10px);
     width: 102%;
@@ -67,17 +68,22 @@ body {
     overflow: hidden;
 }
 #texto_historia2{
-    position: relative;
-    font-size: 20px;
 
+    position: absolute;
+    font-size: 20px;
+    left:30%;
+    right: auto;
     color: white;
+    top: 80px;
+
     opacity: 0;
 }
 #texto_historia{
-    position: relative;
-
+    left:30%;
+    right: auto;
+    position: absolute;
+    top: 50px;
     font-size: 20px;
-    margin-top: 10%;
     color: white;
     opacity: 0;
 }

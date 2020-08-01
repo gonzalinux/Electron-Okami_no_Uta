@@ -82,9 +82,14 @@ app.quit();
 }
 
 function entrar(){
-  mainWindow.loadFile('pagina1.html');
+  mainWindow.loadFile('Htmls/pagina1.html');
 
 
 
 }
 
+ipcMain.on("terminahistorieta",(event,arg)=>{
+  mainWindow.loadFile("Htmls/Instituto.html")
+
+
+})

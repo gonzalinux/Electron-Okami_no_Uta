@@ -11,12 +11,13 @@ const {electron,ipcRenderer}=require("electron");
 let entrar;
 let pCom ;
 let salir;
-
+let skip;
 window.addEventListener('DOMContentLoaded', () => {
     entrar = document.getElementById('entrar');
 
     pCom = document.getElementById('pCompleta');
     salir=document.getElementById('salir');
+    skip=document.getElementById('skip');
     let inicio=document.getElementById('inicio');
     inicio.style.height=(80/100*funciones.tamVentana()[1])+"px";
     inicio.style.width=(20/100*funciones.tamVentana()[0]+"px");
@@ -27,6 +28,10 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function botones() {
+    skip.addEventListener('click', ()=>{
+        ipcRenderer.send("terminahistorieta", "adw");
+
+    })
 
 
     entrar.addEventListener('click', () => {
@@ -35,10 +40,6 @@ function botones() {
 
 
     });
-
-
-
-
 
     });
 

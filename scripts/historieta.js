@@ -1,6 +1,6 @@
 const {ipcRenderer,electronservice}=require("electron");
 const anime=require("animejs");
-const funciones=require("./scripts/funciones");
+const funciones=require("../scripts/funciones");
 const fs=require("fs");
 let barraArriba;
 let barraAbajo;
@@ -86,24 +86,47 @@ function texto() {
 
 
 
-    let intervalo=6000;
+    let intervalo=4000;
+    let textHist1=document.getElementById("texto_historia");
 
     let i=0;
 
-
-
-
-    let textHist1=document.getElementById("texto_historia");
     let stilo=window.getComputedStyle(textHist1);
 
-    let tamlinea=Math.round(stilo.getPropertyValue("width").split("px")[0]*100/parseInt(stilo.getPropertyValue("font-size").split("px")[0]*45));
-    let textHist2=document.getElementById("texto_historia2");
+    let tamlinea=Math.round(stilo.getPropertyValue("width").split("px")[0]*100/parseInt(stilo.getPropertyValue("font-size").split("px")[0]*50));
     let lineas=linea(texto,tamlinea);
-    let textos=[textHist2,textHist1];
     let textoanime;
+    let proceso;
 
-let proceso=setInterval(()=>{
+    textodesplazar(lineas,i,textoanime,proceso);
 
+ proceso=setInterval(()=>{
+     if(i+1===lineas.length){
+         ipcRenderer.send('terminahistorieta',"iniciojuego")
+         clearInterval(proceso);
+     }
+
+     i+=1;
+     textodesplazar(lineas,i,textoanime)
+
+
+
+ },intervalo);
+
+
+
+
+}
+function textodesplazar(lineas,i,textoanime) {
+    let textHist2=document.getElementById("texto_historia2");
+    let textHist1=document.getElementById("texto_historia");
+    let textos=[textHist2,textHist1];
+    let stilo=window.getComputedStyle(textHist1);
+    let pos2={top:80};
+    let pos1={top:50};
+    let poss=[pos1,pos2];
+
+//textHist2.getBoundingClientRect().top
 
 
 
@@ -112,40 +135,47 @@ let proceso=setInterval(()=>{
         easing:"linear",
 
     });
+   textoanime
 
-    textoanime.add({
-        opacity: 1,
-       targets:textos[i%2],
-        duration:2000,
-        begin:function () {
-            textos[i%2].innerHTML=lineas[i++]
+       .add({
+      targets:textos[i%2],
+      duration:800,
+      opacity:1,
+      begin:()=>{
 
-        }
-    });
-    textoanime.add({
-        targets:textos[(i-1)%2],
-        duration:2000,
-        translateY: -2*stilo.getPropertyValue("font-size").split("px")[0]
-    });
-    textoanime.add({
-        targets:textos[i%2],
-        translateY: 2*stilo.getPropertyValue("font-size").split("px")[0],
-        duration:2000,
+          textos[(i)%2].innerHTML=lineas[i++];
+
+      }
+   }).add({
+       duration:800,
+       targets:textos[(i+1)%2],
+       opacity:0
+   },"+=200")
 
 
-    },'-=2000');
-
-
-    textoanime.add({
-        targets:textHist2,
-        opacity:0,
-        duration:2000,
-
-    })
+       .add({
+           duration:1000,
+           targets:poss[(i+1)%2],
+            top:poss[(i)%2].top,
+           update:function () {
+            textos[0].style.top=poss[(i)%2].top+"px";
+           },
 
 
 
-},intervalo);
+       },"+=400")
+       .add({
+           duration:1000,
+           targets:poss[(i)%2],
+           top:poss[(i+1)%2].top,
+           update:function () {
+               textos[1].style.top=poss[(i+1)%2].top+"px";
+           }
+
+       },"-=1000")
+
+
+
 
 
 
@@ -162,6 +192,7 @@ function linea(texto,tamlinea) {
     let finlinea=tamlinea;
     let lineas=[texto.length%tamlinea];
     let condicion=true;
+
     for (i=0;condicion;i++){
         if(finlinea>texto.length) {
             condicion=false;
