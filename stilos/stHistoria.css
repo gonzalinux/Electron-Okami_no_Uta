@@ -71,7 +71,7 @@ body {
 
     position: absolute;
     font-size: 20px;
-    left:30%;
+    left:25%;
     right: auto;
     color: white;
     top: 80px;
@@ -79,7 +79,7 @@ body {
     opacity: 0;
 }
 #texto_historia{
-    left:30%;
+    left:25%;
     right: auto;
     position: absolute;
     top: 50px;

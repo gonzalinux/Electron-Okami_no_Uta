@@ -93,7 +93,7 @@ function texto() {
 
     let stilo=window.getComputedStyle(textHist1);
 
-    let tamlinea=Math.round(stilo.getPropertyValue("width").split("px")[0]*100/parseInt(stilo.getPropertyValue("font-size").split("px")[0]*50));
+    let tamlinea=Math.round(stilo.getPropertyValue("width").split("px")[0]*100/parseInt(stilo.getPropertyValue("font-size").split("px")[0]*40));
     let lineas=linea(texto,tamlinea);
     let textoanime;
     let proceso;
@@ -194,6 +194,7 @@ function linea(texto,tamlinea) {
     let condicion=true;
     let ishtml=false;
     let numhtml=0;
+    let washtml=false;
 
     for (i=0;condicion;i++){
         if(finlinea>texto.length) {
@@ -207,32 +208,36 @@ function linea(texto,tamlinea) {
 
         }
         else {
-            if(ishtml&&texto.toString().charAt(finlinea)!==">"){
-                finlinea++;
-                i--
-
-
-            }
-            else if(ishtml&&texto.toString().charAt(finlinea)===">") {
-                ishtml = false;
-                finlinea++;
-                i--
-            }
             let thislinea=texto.substring(iniciolinea,finlinea);
-            for(let x;x<thislinea.length;x++) {
-                if (thislinea.charAt(x) == "<")
-                    ishtml = true;
+            if(!washtml){
+            for(let x=0;x<thislinea.length;x++){
 
-                if (ishtml) {
-                    numhtml++;
-                    if (thislinea.charAt(x) == ">") {
-                        ishtml = false;
-                    }
+                if(thislinea.charAt(x)==="<"){
+                    ishtml=true;
+                    washtml=true;
+
+
                 }
+                if(ishtml){
+                    numhtml++;
+                    if(thislinea.charAt(x)===">"){
+                        ishtml=false;
+                    }
+
+
+                }
+            }}else washtml=false;
+
+
+
+            if(washtml){
+                finlinea+=numhtml;
+                i--;
+                numhtml=0;
+
+                alert("dawdwad")
             }
-            finlinea+=numhtml;
-            numhtml=0;
-            if(!ishtml){
+            else{
             lineas[i] = texto.substring(iniciolinea,finlinea);
             iniciolinea=finlinea+1;
             finlinea+=tamlinea;
@@ -240,5 +245,7 @@ function linea(texto,tamlinea) {
 
 
     }
+
+
     return lineas;
 }
