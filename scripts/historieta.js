@@ -154,7 +154,7 @@ function textodesplazar(lineas,i,textoanime) {
 
 
        .add({
-           duration:1000,
+           duration:800,
            targets:poss[(i+1)%2],
             top:poss[(i)%2].top,
            update:function () {
@@ -163,16 +163,16 @@ function textodesplazar(lineas,i,textoanime) {
 
 
 
-       },"+=400")
+       },"+=200")
        .add({
-           duration:1000,
+           duration:800,
            targets:poss[(i)%2],
            top:poss[(i+1)%2].top,
            update:function () {
                textos[1].style.top=poss[(i+1)%2].top+"px";
            }
 
-       },"-=1000")
+       },"-=1200")
 
 
 
@@ -192,6 +192,8 @@ function linea(texto,tamlinea) {
     let finlinea=tamlinea;
     let lineas=[texto.length%tamlinea];
     let condicion=true;
+    let ishtml=false;
+    let numhtml=0;
 
     for (i=0;condicion;i++){
         if(finlinea>texto.length) {
@@ -205,10 +207,36 @@ function linea(texto,tamlinea) {
 
         }
         else {
+            if(ishtml&&texto.toString().charAt(finlinea)!==">"){
+                finlinea++;
+                i--
+
+
+            }
+            else if(ishtml&&texto.toString().charAt(finlinea)===">") {
+                ishtml = false;
+                finlinea++;
+                i--
+            }
+            let thislinea=texto.substring(iniciolinea,finlinea);
+            for(let x;x<thislinea.length;x++) {
+                if (thislinea.charAt(x) == "<")
+                    ishtml = true;
+
+                if (ishtml) {
+                    numhtml++;
+                    if (thislinea.charAt(x) == ">") {
+                        ishtml = false;
+                    }
+                }
+            }
+            finlinea+=numhtml;
+            numhtml=0;
+            if(!ishtml){
             lineas[i] = texto.substring(iniciolinea,finlinea);
             iniciolinea=finlinea+1;
             finlinea+=tamlinea;
-        }
+        }}
 
 
     }
