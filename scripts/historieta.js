@@ -235,7 +235,7 @@ function linea(texto,tamlinea) {
                 i--;
                 numhtml=0;
 
-                alert("dawdwad")
+
             }
             else{
             lineas[i] = texto.substring(iniciolinea,finlinea);
