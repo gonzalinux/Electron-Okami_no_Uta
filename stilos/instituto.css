@@ -1,5 +1,5 @@
 body{
-    background: url("../fotos/bed2b36365addb125c2ed28aef91557b.png") no-repeat center top fixed ;
+    background: url("../fotos/pasillo.png") no-repeat center top fixed ;
     background-size: cover;
     overflow: hidden;
 
@@ -8,6 +8,7 @@ body{
     color:red;
 }
 * {
+    user-select: none;
     box-sizing: border-box;
 }
 
@@ -20,10 +21,65 @@ body{
     background: rgba(224, 162, 90,0.5);
     border-radius: 10px;
     border: 2px solid  yellow;
+visibility: hidden;
+}
+.hablante{
+    color: brown;
+    font-weight: bolder;
+    font-size: 150%;
+    margin-bottom: 1%;
+    padding-left: 2%;
+    background: rgba(205, 175, 21, 0.62);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.texto-chat{
+    margin-left: 3%;
+    font-size: 110%;
+    color:darkgreen;
+
 
 }
 #personaje-derecha{
     position: absolute;
-    width: 30%;
-    left: 60%
+    width: 35%;
+right:0%;
+bottom: 0%;
+    visibility: hidden;}
+#imagen_derecha{
+    padding-bottom: 0;
+    margin-bottom: -10px;
+    width: 100%;
+
 }
+
+#personaje-izquierda{
+    position: absolute;
+    width: 35%;
+    left:0%;
+    bottom: 0%;
+    visibility: hidden;
+}
+#imagen_izquierda{
+    padding-bottom: 0;
+    margin-bottom: -10px;
+    width: 100%;
+
+}
+#personaje-centro{
+    position: absolute;
+    width: 35%;
+    left:32.5%;
+    right: 32.5%;
+    bottom: 0%;
+    visibility: hidden;
+}
+#imagen_centro{
+    padding-bottom: 0;
+    margin-bottom: -10px;
+    width: 100%;
+
+}
+

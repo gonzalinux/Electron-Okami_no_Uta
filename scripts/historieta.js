@@ -12,7 +12,7 @@ let archivo;
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    archivo = fs.readFileSync('texto/historia1.txt', 'utf-8');
+    archivo = fs.readFileSync('./texto/historia1.txt', 'utf-8');
     redimensionarelem();
 
     animarlaterales();
@@ -86,6 +86,7 @@ function texto() {
 
 
 
+
     let intervalo=4000;
     let textHist1=document.getElementById("texto_historia");
 
@@ -94,11 +95,12 @@ function texto() {
     let stilo=window.getComputedStyle(textHist1);
 
     let tamlinea=Math.round(stilo.getPropertyValue("width").split("px")[0]*100/parseInt(stilo.getPropertyValue("font-size").split("px")[0]*40));
-    let lineas=linea(texto,tamlinea);
+    let lineas=lineaca(texto,tamlinea);
+
     let textoanime;
     let proceso;
 
-    textodesplazar(lineas,i,textoanime,proceso);
+    textodesplazar(lineas,i,textoanime);
 
  proceso=setInterval(()=>{
      if(i+1===lineas.length){
@@ -125,7 +127,6 @@ function textodesplazar(lineas,i,textoanime) {
     let pos2={top:80};
     let pos1={top:50};
     let poss=[pos1,pos2];
-
 //textHist2.getBoundingClientRect().top
 
 
@@ -186,7 +187,8 @@ function textodesplazar(lineas,i,textoanime) {
 
 
 
-function linea(texto,tamlinea) {
+function lineaca(texto,tamlinea) {
+
     let i=0;
     let iniciolinea=0;
     let finlinea=tamlinea;
