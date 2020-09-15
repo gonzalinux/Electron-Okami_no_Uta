@@ -17,11 +17,12 @@ let indextotal=0;
 let proceso;
 let estaescribiendo=false;
 let stringchat;
-let chattotal;
 let archivo = fs.readFileSync('texto/introinstituto.txt', 'utf-8');
 let set;
-let finalhtml="";
-let numfinalhtml=0;
+
+let htmldondeseescribe=new Array(0);
+
+
 window.addEventListener('DOMContentLoaded', () => {
     body=document.body;
     body.style.height=funciones.tamVentana()[1]+"px";
@@ -48,7 +49,7 @@ window.addEventListener('resize',()=>{
 });
 function inicio(){
 
-imagencentro.src="../fotos/lionxd.png";
+
     personajecentro.style.visibility="visible";
     personajecentro.style.opacity=0;
     barrachat.style.visibility="visible";
@@ -68,22 +69,35 @@ let animcentroaparece=anime({
         autoplay:true,
         easing: "linear"
     });
-textochat.innerHTML="";
-nombrechat.innerHTML=set[0].hablante;
-stringchat=set[0].intervencion[0];
 
 
-  proceso=setInterval(()=>{
-      estaescribiendo=true;
-      sacarletrastexto(stringchat)}, 50
 
- );
+
+
+
+intervalchat(stringchat)
 
 
 
 
 
 }
+
+
+function intervalchat(stringchat) {
+    textochat.innerHTML="";
+    cambiarhablante();
+    stringchat=set[indextotal].intervencion[0];
+    htmldondeseescribe.push(textochat);
+    proceso=setInterval(()=>{
+    estaescribiendo=true;
+    sacarletrastexto(stringchat)}, 50
+
+);
+
+
+}
+
 function clickenchat(){
     if(estaescribiendo){
         clearInterval(proceso);
@@ -98,33 +112,65 @@ function clickenchat(){
 
 function sacarletrastexto(texto) {
     let char =texto.charAt(idextexto++);
+    let dondeseescribira=htmldondeseescribe[htmldondeseescribe.length-1];
 
+//comprobamos si el char abre una etiqueta html
     if(char==="<"){
+
+
+        //si la abre tenemos que meterlo directamente sin esperar
         let html="";
+        //hasta que no termine seguimos
         while(char!==">"){
+
             html+=char;
             char =texto.charAt(idextexto++);
         }
-
+        //se le añade un id para escribir dentro
+        html+='id="sub'+htmldondeseescribe.length+'"';
+        //se le cierra con el >
         html+=char;
-        textochat.innerHTML+=html;
-        let cierrehtml=textochat.innerHTML.charAt(textochat.innerHTML.length-1);
-        let int=2;
-        while(cierrehtml.charAt(1)!=="/"){
-            cierrehtml=textochat.innerHTML.charAt(textochat.innerHTML.length-int)+cierrehtml;
-            int++;
+        //se añade de golpe para que se aplique la etiqueta html
+        dondeseescribira.innerHTML+=html;
+        //se recupera ese elemento html
+        let htmldondeescribeestavex=document.getElementById("sub"+htmldondeseescribe.length);
+        htmldondeseescribe.push(htmldondeescribeestavex);
+
+
+
+        char =texto.charAt(idextexto++);
+
         }
 
+    if(char==="|") {
+        htmldondeseescribe.pop();
+        return
 
-        alert(html);
-        char =texto.charAt(idextexto++);
-        finalhtml=cierrehtml;
-        numfinalhtml=cierrehtml.length
-    }
-    textochat.innerHTML=textochat.innerHTML.substring(0,textochat.innerHTML.length-numfinalhtml);
-    textochat.innerHTML+=char+finalhtml;
+
+        }
+
+    dondeseescribira=htmldondeseescribe[htmldondeseescribe.length-1];
+    dondeseescribira.innerHTML+=char;
     if(idextexto>texto.length) {
         clearInterval(proceso);
+        estaescribiendo=false;
+        idextexto=0;
+        indextotal++;
+
+        setTimeout(()=>{intervalchat( set[indextotal].intervencion[0])},1000)
+
     }
+
+
+}
+function cambiarhablante() {
+    let imagen=set[indextotal].hablante;
+    switch (imagen) {
+        case "Gala": imagen="../fotos/galadeloschinos.png";break;
+        case "Masu": imagen="../fotos/Masudeloschinos.png";break;
+        case "Lion": imagen="../fotos/lionxd.png"
+    }
+    imagencentro.src=imagen;
+    nombrechat.innerHTML=set[indextotal].hablante;
 
 }

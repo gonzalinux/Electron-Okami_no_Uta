@@ -5,7 +5,8 @@ body{
 
 }
 .klk{
-    color:red;
+    font-family: oxygen, sans-serif;
+    font-weight: bolder;
 }
 * {
     user-select: none;
@@ -18,7 +19,7 @@ body{
     top: 80%;
     width: 80%;
     height: 15%;
-    background: rgba(224, 162, 90,0.5);
+    background: rgba(224, 162, 90,0.7);
     border-radius: 10px;
     border: 2px solid  yellow;
 visibility: hidden;
@@ -38,7 +39,7 @@ visibility: hidden;
 .texto-chat{
     margin-left: 3%;
     font-size: 110%;
-    color:darkgreen;
+    color: black;
 
 
 }

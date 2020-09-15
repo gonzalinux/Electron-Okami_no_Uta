@@ -30,6 +30,7 @@ tamVentana=function tamVentana() {
 linea=function linea(texto,tamlinea) {
  let set=new Array(0);
  let index=0;
+ let indextotal=0;
  let tamano=0;
  let nombre="";
  let quehacer="nada";
@@ -38,6 +39,8 @@ linea=function linea(texto,tamlinea) {
  for(let i=0;i<texto.length;i++){
      let char=texto.charAt(i);
 
+
+
      switch (char) {
          case "[": quehacer="hablante";break;
          case "]": quehacer="cierrohablante";break;
@@ -45,14 +48,23 @@ linea=function linea(texto,tamlinea) {
          case "}":quehacer="cierrochat";break;
 
          case "¬":quehacer="cierrototal";
-         default:{switch (quehacer) {
+         default:{
+             switch (quehacer) {
              case "hablante":nombre+=char;break;
 
              case "chat":tamano++;
                         chat[index]+=char;
                         break;
-             case"cierrochat":chat.push("");index++;break;
+             case "cierrochat":chat.push("");index++;break;
              case "cierrototal":set.push(new Nuevoset(nombre,chat,tamano));
+                nombre="";
+                 chat=new Array(1);
+                 chat[0]="";
+                  tamano=0;
+                  index=0;
+                  quehacer="nada"
+
+
 
 
          }}

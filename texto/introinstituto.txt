@@ -1,3 +1,12 @@
 [Lion]
-{hola buenas tardes que tal<span class="klk"> hola}
+{hola buenas tardes que tal<span class="klk"> hola|
+awdawdawaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}
 ¬
+[Masu]
+{si o que bro}
+¬
+[Gala]
+{no pue ser}
+¬
+[Masu]
+{No se}¬
