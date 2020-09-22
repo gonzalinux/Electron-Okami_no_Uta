@@ -1,6 +1,6 @@
 [Lion]
 {hola buenas tardes que tal<span class="klk"> hola|
-awdawdawaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}
+awdawdawaaaaaaa}
 ¬
 [Masu]
 {si o que bro}

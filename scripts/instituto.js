@@ -75,7 +75,7 @@ let animcentroaparece=anime({
 
 
 
-intervalchat(stringchat)
+intervalchat()
 
 
 
@@ -84,14 +84,15 @@ intervalchat(stringchat)
 }
 
 
-function intervalchat(stringchat) {
+function intervalchat() {
     textochat.innerHTML="";
-    cambiarhablante();
+    cambiarhablante()
+
     stringchat=set[indextotal].intervencion[0];
     htmldondeseescribe.push(textochat);
     proceso=setInterval(()=>{
     estaescribiendo=true;
-    sacarletrastexto(stringchat)}, 50
+    sacarletrastexto()}, 50
 
 );
 
@@ -101,16 +102,27 @@ function intervalchat(stringchat) {
 function clickenchat(){
     if(estaescribiendo){
         clearInterval(proceso);
-        textochat.innerHTML+=stringchat.substring(idextexto,stringchat.length-1);
+
+        textochat.innerHTML+=set[indextotal].intervencion[0].substring(idextexto,stringchat.length-1);
         estaescribiendo=false;
+
+
     }
+    else {
+        indextotal++;
+        htmldondeseescribe=new Array([textochat])
+        intervalchat();
+
+    }
+
 
 
 
 
 }
 
-function sacarletrastexto(texto) {
+function sacarletrastexto() {
+    let texto=stringchat;
     let char =texto.charAt(idextexto++);
     let dondeseescribira=htmldondeseescribe[htmldondeseescribe.length-1];
 
@@ -157,7 +169,7 @@ function sacarletrastexto(texto) {
         idextexto=0;
         indextotal++;
 
-        setTimeout(()=>{intervalchat( set[indextotal].intervencion[0])},1000)
+        setTimeout(()=>{intervalchat()},1000)
 
     }
 
