@@ -19,6 +19,7 @@ let estaescribiendo=false;
 let stringchat;
 let archivo = fs.readFileSync('texto/introinstituto.txt', 'utf-8');
 let set;
+let clickchat;
 
 let htmldondeseescribe=new Array(0);
 
@@ -103,15 +104,20 @@ function clickenchat(){
     if(estaescribiendo){
         clearInterval(proceso);
 
-        textochat.innerHTML+=set[indextotal].intervencion[0].substring(idextexto,stringchat.length-1);
+        textochat.innerHTML+=set[indextotal].intervencion[0].substring(idextexto,stringchat.length);
         estaescribiendo=false;
+         clickchat=setTimeout(()=>{clickenchat()},1000)
 
 
     }
     else {
+
+        clearTimeout(clickchat);
         indextotal++;
+        idextexto=0;
         htmldondeseescribe=new Array([textochat])
         intervalchat();
+
 
     }
 
@@ -179,7 +185,7 @@ function cambiarhablante() {
     let imagen=set[indextotal].hablante;
     switch (imagen) {
         case "Gala": imagen="../fotos/galadeloschinos.png";break;
-        case "Masu": imagen="../fotos/Masudeloschinos.png";break;
+        case "Masu": imagen="../fotos/masudeloschinos.png";break;
         case "Lion": imagen="../fotos/lionxd.png"
     }
     imagencentro.src=imagen;
