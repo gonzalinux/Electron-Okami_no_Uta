@@ -1,12 +1,11 @@
-[Lion]
-{hola buenas tardes que tal<span class="klk"> hola|
-awdawdawaaaaaaa}
-¬
 [Masu]
-{si o que bro tengo que poner mas texto para que sea util gracias}
+{<span class="accion">Y entonces, la alumna, cerró el libro.</span>}
 ¬
 [Gala]
+{Masu... No me parece bien que cuentes historias tan tétricas}
+¬
+[Koi]
 {no pue ser te lo juro que si porque necesito ocupar espacio}
 ¬
-[Masu]
+[Lion]
 {No se butno si pero no me importa}¬

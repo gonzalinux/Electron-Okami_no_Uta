@@ -62,7 +62,7 @@ linea=function linea(texto,tamlinea) {
                  chat[0]="";
                   tamano=0;
                   index=0;
-                  quehacer="nada"
+                  quehacer="nada";
 
 
 

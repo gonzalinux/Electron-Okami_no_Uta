@@ -1,12 +1,22 @@
+@font-face {
+    font-family: Merriweather-Italic;
+    src:url("../fuentes/Merriweather/Merriweather-Italic.ttf");
+}
+@font-face {
+    font-family: Merriweather-Regular;
+    src:url("../fuentes/Merriweather/Merriweather-Regular.ttf");
+}
+
+
 body{
-    background: url("../fotos/pasillo.png") no-repeat center top fixed ;
+    background: url("../fotos/aula.jpg") no-repeat center top fixed ;
     background-size: cover;
     overflow: hidden;
 
 }
-.klk{
-    font-family: oxygen, sans-serif;
+.accion{
     font-weight: bolder;
+    font-family: Merriweather-Italic, serif;
 }
 * {
     user-select: none;
@@ -18,7 +28,7 @@ body{
     transform: translateX(10%);
     top: 80%;
     width: 80%;
-    height: 15%;
+    height: 17%;
     background: rgba(224, 162, 90,0.7);
     border-radius: 10px;
     border: 2px solid  yellow;
@@ -38,11 +48,42 @@ visibility: hidden;
 
 .texto-chat{
     margin-left: 3%;
-    font-size: 110%;
+    font-size: 130%;
+    font-family: Merriweather-Regular;
     color: black;
+    overflow: auto;
+    height: 80%;
+    scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+    scrollbar-width: thin;
 
 
 }
+.texto-chat::-webkit-scrollbar{
+    -webkit-appearance: none;
+
+}
+
+
+.texto-chat::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.texto-chat::-webkit-scrollbar-button:increment,.texto-chat::-webkit-scrollbar-button {
+    display: none;
+}
+
+.texto-chat::-webkit-scrollbar:horizontal {
+display: none}
+.texto-chat::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.45);
+}
+
+.texto-chat::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
 #personaje-derecha{
     position: absolute;
     width: 35%;
@@ -71,7 +112,7 @@ bottom: 0%;
 }
 #personaje-centro{
     position: absolute;
-    width: 35%;
+    width: 40%;
     left:32.5%;
     right: 32.5%;
     bottom: 0%;
@@ -84,3 +125,31 @@ bottom: 0%;
 
 }
 
+.lobo{
+
+
+    float:left;
+    left: 65%;
+    top:10%;
+    width: 20%;
+    pointer-events: none;
+    position: relative;
+}
+
+.loboimg{
+    animation: alternate-reverse infinite ;
+    animation-name: vayben;
+    animation-duration: 2s;
+    width: 100%;
+
+}
+@keyframes vayben{
+    from{
+        transform: translateY(-20px);
+    }
+    to{
+        transform: translateY(20px);
+    }
+
+
+}

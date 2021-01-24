@@ -95,20 +95,19 @@ function texto() {
     let stilo=window.getComputedStyle(textHist1);
 
     let tamlinea=Math.round(stilo.getPropertyValue("width").split("px")[0]*100/parseInt(stilo.getPropertyValue("font-size").split("px")[0]*40));
-    let lineas=lineaca(texto,tamlinea);
-
+    let lineas=extraerlineas(texto,tamlinea);
     let textoanime;
     let proceso;
 
     textodesplazar(lineas,i,textoanime);
 
  proceso=setInterval(()=>{
-     if(i+1===lineas.length){
-         ipcRenderer.send('terminahistorieta',"iniciojuego")
+     if(i+1>=lineas.length){
+         ipcRenderer.send('terminahistorieta',"iniciojuego");
          clearInterval(proceso);
      }
 
-     i+=1;
+     i+=4;
      textodesplazar(lineas,i,textoanime)
 
 
@@ -119,14 +118,57 @@ function texto() {
 
 
 }
+
 function textodesplazar(lineas,i,textoanime) {
+    let textohtml=document.getElementById("texto_historia");
+
+    let animacion=anime.timeline({
+        easing:'linear'
+    });
+    animacion.add({
+
+        targets:textohtml,
+
+        duration: 800,
+
+        opacity:1,
+        begin:()=>{
+            textohtml.innerText="";
+            for(let x=0;x<4;x++){
+                if(lineas[i+x]===undefined)
+                    break;
+                textohtml.innerHTML+=lineas[i+x]+"\n"
+
+            }
+
+        }
+
+
+    }).add({
+        targets:textohtml,
+
+        duration: 800,
+        opacity:0
+
+
+
+
+    },3000)
+
+}
+
+
+
+function textodesplazar2(lineas,i,textoanime) {
     let textHist2=document.getElementById("texto_historia2");
     let textHist1=document.getElementById("texto_historia");
-    let textos=[textHist2,textHist1];
+    let textHist3=document.getElementById("texto_historia3");
+    let textos=[textHist3,textHist2,textHist1];
     let stilo=window.getComputedStyle(textHist1);
     let pos2={top:80};
     let pos1={top:50};
-    let poss=[pos1,pos2];
+    let pos3={top: 110};
+    let poss=[pos1,pos2,pos3];
 //textHist2.getBoundingClientRect().top
 
 
@@ -139,27 +181,27 @@ function textodesplazar(lineas,i,textoanime) {
    textoanime
 
        .add({
-      targets:textos[i%2],
+      targets:textos[i%3],
       duration:800,
       opacity:1,
       begin:()=>{
 
-          textos[(i)%2].innerHTML=lineas[i++];
+          textos[(i)%3].innerHTML=lineas[i++];
 
       }
    }).add({
        duration:800,
-       targets:textos[(i+1)%2],
+       targets:textos[(i+1)%3],
        opacity:0
    },"+=200")
 
 
        .add({
            duration:800,
-           targets:poss[(i+1)%2],
+           targets:poss[(i+1)%3],
             top:poss[(i)%2].top,
            update:function () {
-            textos[0].style.top=poss[(i)%2].top+"px";
+            textos[0].style.top=poss[(i)%3].top+"px";
            },
 
 
@@ -167,10 +209,10 @@ function textodesplazar(lineas,i,textoanime) {
        },"+=200")
        .add({
            duration:800,
-           targets:poss[(i)%2],
-           top:poss[(i+1)%2].top,
+           targets:poss[(i)%3],
+           top:poss[(i+1)%3].top,
            update:function () {
-               textos[1].style.top=poss[(i+1)%2].top+"px";
+               textos[1].style.top=poss[(i+1)%3].top+"px";
            }
 
        },"-=1200")
@@ -186,8 +228,35 @@ function textodesplazar(lineas,i,textoanime) {
 
 
 
+function extraerlineas(texto,tamlinea) {
+    let lineas=[];
+    let aux='';
+    let char;
+    let ishtml=false;
+    for(let i=0;i<texto.length;i++){
 
-function lineaca(texto,tamlinea) {
+        char=texto.charAt(i);
+
+        aux+=char;
+        if(char==='<')
+            if(char)
+            ishtml=true;
+        if(char==='/'&&texto.charAt(i-1)==='<') {
+            ishtml = false;
+        }
+        if(char==='\n'||i===texto.length-1&&!ishtml) {
+
+            lineas.push(aux);
+            aux='';
+            console.log(lineas.length)
+
+        }
+
+    }
+return lineas
+
+}
+function extraerlineas2(texto,tamlinea) {
 
     let i=0;
     let iniciolinea=0;

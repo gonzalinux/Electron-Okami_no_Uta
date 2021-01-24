@@ -1,7 +1,7 @@
-<span class="klk">Hay </span>una leyenda sobre el bosque casi infinito
+Hay una leyenda sobre el <b>bosque</b> casi infinito
 que está al lado de un aparentemente normal instituto,
-a esta leyenda se la conoce como "Ōkami no uta"
-o La canción de los lobos.
+a esta leyenda se la conoce como <span class="resaltartexto">Ōkami no uta</span>
+o <span class="resaltartexto">La canción de los lobos.</span>
 
 Se dice que hay hombres y mujeres bestia,
 allí seres mitad humano mitad

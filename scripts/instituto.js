@@ -87,7 +87,7 @@ intervalchat()
 
 function intervalchat() {
     textochat.innerHTML="";
-    cambiarhablante()
+    cambiarhablante();
 
     stringchat=set[indextotal].intervencion[0];
     htmldondeseescribe.push(textochat);
@@ -103,20 +103,22 @@ function intervalchat() {
 function clickenchat(){
     if(estaescribiendo){
         clearInterval(proceso);
+        proceso=setInterval(()=>{
+            estaescribiendo=true;
+            sacarletrastexto()}, 2
 
-        textochat.innerHTML+=set[indextotal].intervencion[0].substring(idextexto,stringchat.length);
-        estaescribiendo=false;
-         clickchat=setTimeout(()=>{clickenchat()},1000)
+        );
+
 
 
     }
     else {
 
-        clearTimeout(clickchat);
-        indextotal++;
+
         idextexto=0;
-        htmldondeseescribe=new Array([textochat])
+        htmldondeseescribe=new Array([textochat]);
         intervalchat();
+
 
 
     }
@@ -136,36 +138,46 @@ function sacarletrastexto() {
     if(char==="<"){
 
 
+
         //si la abre tenemos que meterlo directamente sin esperar
         let html="";
+        let escierre=false;
         //hasta que no termine seguimos
         while(char!==">"){
+
+
+            if(escierre){
+
+            }
+
+            if(char==='/'){
+                escierre=true;
+            }
 
             html+=char;
             char =texto.charAt(idextexto++);
         }
-        //se le añade un id para escribir dentro
-        html+='id="sub'+htmldondeseescribe.length+'"';
-        //se le cierra con el >
-        html+=char;
-        //se añade de golpe para que se aplique la etiqueta html
-        dondeseescribira.innerHTML+=html;
-        //se recupera ese elemento html
-        let htmldondeescribeestavex=document.getElementById("sub"+htmldondeseescribe.length);
-        htmldondeseescribe.push(htmldondeescribeestavex);
+        if(escierre) {
+            htmldondeseescribe.pop();
+            return
+
+        }else {
+            //se le añade un id para escribir dentro
+            html += 'id="sub' + htmldondeseescribe.length + '"';
+            //se le cierra con el >
+            html += char;
+            //se añade de golpe para que se aplique la etiqueta html
+            dondeseescribira.innerHTML += html;
+            //se recupera ese elemento html
+            let htmldondeescribeestavex = document.getElementById("sub" + htmldondeseescribe.length);
+            htmldondeseescribe.push(htmldondeescribeestavex);
 
 
-
-        char =texto.charAt(idextexto++);
-
+            char = texto.charAt(idextexto++);
+        }
         }
 
-    if(char==="|") {
-        htmldondeseescribe.pop();
-        return
 
-
-        }
 
     dondeseescribira=htmldondeseescribe[htmldondeseescribe.length-1];
     dondeseescribira.innerHTML+=char;
@@ -175,7 +187,6 @@ function sacarletrastexto() {
         idextexto=0;
         indextotal++;
 
-        setTimeout(()=>{intervalchat()},1000)
 
     }
 
@@ -184,11 +195,11 @@ function sacarletrastexto() {
 function cambiarhablante() {
     let imagen=set[indextotal].hablante;
     switch (imagen) {
-        case "Gala": imagen="../fotos/galadeloschinos.png";break;
-        case "Masu": imagen="../fotos/masudeloschinos.png";break;
-        case "Lion": imagen="../fotos/lionxd.png"
+        case "Gala": imagen="../fotos/Gala.png";break;
+        case "Masu": imagen="../fotos/Masu.png";break;
+        case "Lion": imagen="../fotos/Lion.png";break;
+        case "Koi": imagen="../fotos/Koi.png"
     }
     imagencentro.src=imagen;
     nombrechat.innerHTML=set[indextotal].hablante;
-
 }
